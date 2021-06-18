@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -64,6 +65,13 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                 ),
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                    onPressed: () {}, child: const Text('Login')),
               )
             ])
           ],

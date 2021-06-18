@@ -31,6 +31,8 @@ dependencies:
   flutter_cache_store: ^0.8.0
   logger: ^1.0.0
   http_interceptor: ^1.0.0
+  http: ^0.13.3
+  dio: ^4.0.0
 
 dev_dependencies:
   flutter_test:
