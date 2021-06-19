@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:sipandumobile/config/http_service.dart';
 import 'package:dio/dio.dart';
+import 'dart:convert';
+
+import 'dart:async';
 
 class LoginPage extends StatefulWidget {
+  // HttpService http;
   LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -9,6 +14,49 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late HttpService http;
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  bool isLoading = false;
+
+  Future cek() async {
+    Response response;
+    try {
+      response = await http.postRequest("/validation/cek/", {});
+
+      if (response.statusCode == 200) {
+      } else {
+        print("There is some problem status code not 200");
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future login(username) async {
+    Response response;
+    try {
+      response = await http.postRequest("/login/auth", {'user': username});
+
+      if (response.statusCode == 200) {
+      } else {
+        print("There is some problem status code not 200");
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    http = HttpService();
+
+    cek();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,6 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: const InputDecoration(
                     hintText: 'username',
                   ),
+                  controller: _usernameController,
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter some text';
@@ -58,6 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: const InputDecoration(
                     hintText: 'Password',
                   ),
+                  // controller: password,
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter some text';
@@ -71,7 +121,10 @@ class _LoginPageState extends State<LoginPage> {
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text('Login')),
+                    onPressed: () {
+                      login(_usernameController.text);
+                    },
+                    child: const Text('Login')),
               )
             ])
           ],
