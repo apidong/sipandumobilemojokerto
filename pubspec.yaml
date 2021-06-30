@@ -35,6 +35,9 @@ dependencies:
   dio: ^4.0.0
   device_info: ^2.0.2
   plugin_platform_interface: ^2.0.0
+  flutter_bloc: ^7.0.1
+  flutter_secure_storage: ^4.2.0
+  equatable: ^2.0.3
 
 dev_dependencies:
   flutter_test:

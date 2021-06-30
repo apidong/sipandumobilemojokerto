@@ -1,59 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:sipandumobile/config/http_service.dart';
-import 'package:dio/dio.dart';
-import 'dart:convert';
-
-import 'dart:async';
+import 'package:sipandumobile/core/auth/login/bloc/login_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
+  //  LoginPage({Key? key}) : super(key: key);
+  // ignore: unused_field
+  final LoginBloc loginbloc;
+
+  const LoginPage({Key? key, required this.loginbloc}) : super(key: key);
   // HttpService http;
-  LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late HttpService http;
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
   bool isLoading = false;
 
-  Future cek() async {
-    Response response;
-    try {
-      response = await http.postRequest("/validation/cek/", {});
-
-      if (response.statusCode == 200) {
-      } else {
-        print("There is some problem status code not 200");
-      }
-    } on Exception catch (e) {
-      print(e);
-    }
-  }
-
-  Future login(username) async {
-    Response response;
-    try {
-      response = await http.postRequest("/login/auth", {'user': username});
-
-      if (response.statusCode == 200) {
-      } else {
-        print("There is some problem status code not 200");
-      }
-    } on Exception catch (e) {
-      print(e);
-    }
-  }
-
   @override
   void initState() {
-    http = HttpService();
-
-    cek();
-
     super.initState();
   }
 
@@ -107,6 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: const InputDecoration(
                     hintText: 'Password',
                   ),
+                  controller: _passwordController,
                   // controller: password,
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
@@ -121,10 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(
-                    onPressed: () {
-                      login(_usernameController.text);
-                    },
-                    child: const Text('Login')),
+                    onPressed: () {}, child: const Text('Login')),
               )
             ])
           ],

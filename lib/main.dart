@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter/widgets.dart';
-import 'package:sipandumobile/route/route.gr.dart';
+import 'package:sipandumobile/config/route/route.gr.dart';
 
 void main() {
   runApp(SipanduApp());

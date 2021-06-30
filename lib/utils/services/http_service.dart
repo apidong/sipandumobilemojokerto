@@ -21,9 +21,6 @@ class HttpService {
       ..baseUrl = baseUrl
       ..connectTimeout = 5000 //5s
       ..receiveTimeout = 5000
-      ..validateStatus = (int? status) {
-        return status != null && status > 0;
-      }
       ..headers = {
         HttpHeaders.userAgentHeader: 'dio',
         'common-header': 'xx',
@@ -64,6 +61,10 @@ class HttpService {
 
     try {
       response = await dio.get(endPoint);
+      print(response.data);
+      print(response.headers);
+// print(response.request);
+      print(response.statusCode);
     } on DioError catch (e) {
       print(e.message);
       throw Exception(e.message);
@@ -79,7 +80,10 @@ class HttpService {
 
     try {
       response = await dio.post(endPoint, data: data);
-      print(response);
+      print(response.data);
+      print(response.headers);
+// print(response.request);
+      print(response.statusCode);
     } on DioError catch (e) {
       print(e.message);
       throw Exception(e.message);
