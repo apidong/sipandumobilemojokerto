@@ -1,22 +1,18 @@
 part of 'login_bloc.dart';
 
-@immutable
-abstract class LoginState {
+abstract class LoginState extends Equatable {
+  const LoginState({
+    this.status = FormzStatus.pure,
+    this.username = const Username.pure(),
+    this.password = const Password.pure(),
+  });
+
+  final FormzStatus status;
+  final Username username;
+  final Password password;
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [status, username, password];
 }
 
 class LoginInitial extends LoginState {}
-
-class LoginLoading extends LoginState {}
-
-class LoginSuccess extends LoginState {}
-
-class LoginFailure extends LoginState {
-  final String error;
-
-  LoginFailure({required this.error});
-
-  @override
-  List<Object> get props => [error];
-}

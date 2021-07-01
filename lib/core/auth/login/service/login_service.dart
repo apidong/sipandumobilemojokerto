@@ -1,14 +1,15 @@
 import 'package:dio/dio.dart';
+import 'package:sipandumobile/core/auth/login/index.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:sipandumobile/utils/services/http_service.dart';
 
-class Login {
+class LoginService {
   // String username;
   // String password;
 
   // Login({required this.username, required this.password});
 
-  static Future<dynamic> login(String username, String password) async {
+  Future<dynamic> login(String username, Password password) async {
     Response response;
     try {
       response = await HttpService().postRequest(

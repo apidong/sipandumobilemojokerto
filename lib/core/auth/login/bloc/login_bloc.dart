@@ -2,36 +2,35 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
-import 'package:sipandumobile/core/auth/login/modul/login_module.dart';
+import 'package:formz/formz.dart';
+import 'package:sipandumobile/core/auth/login/models/models.dart';
+import 'package:sipandumobile/core/auth/login/service/login_service.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final Login _login;
+  LoginBloc(this._loginservice) : super(LoginInitial());
 
-  LoginBloc(this._login) : super(LoginInitial());
+  final LoginService _loginservice;
 
   @override
-  @override
-  Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    if (event is LoginButtonPressed) {
-      yield* _mapLoginToState(event);
+  Stream<LoginState> mapEventToState(
+    LoginEvent event,
+  ) async* {
+    if (event is LoginSubmitted) {
+      yield* _mapLoginSubmittedToState(event, state);
     }
   }
 
-  Stream<LoginState> _mapLoginToState(LoginButtonPressed event) async* {
-    yield LoginLoading();
-
+  Stream<LoginState> _mapLoginSubmittedToState(
+    LoginSubmitted event,
+    LoginState state,
+  ) async* {
     try {
-      // final user = await _login.login(event.username, event.password);
-      // if (user != null) {
-      //   yield LoginSuccess();
-      //   yield LoginInitial();
-      // } else {
-      //   yield LoginFailure(error: 'Something very weird just happened');
-      // }
-    } catch (e) {}
+      print(state);
+      var cek = await _loginservice.login(state.username, state.password);
+      print(cek);
+    } on Exception catch (_) {}
   }
 }

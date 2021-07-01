@@ -5,7 +5,7 @@ import 'package:sipandumobile/core/auth/login/screen/login.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    AutoRoute(page: LoginPage, initial: true),
+    AutoRoute(path: '/', page: LoginPage, initial: true),
     AutoRoute(page: HomePage),
   ],
 )

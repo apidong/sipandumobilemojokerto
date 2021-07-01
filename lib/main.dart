@@ -7,17 +7,14 @@ void main() {
 }
 
 class SipanduApp extends StatelessWidget {
-  final router = AppRouter();
+  final _router = AppRouter();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(
-          primarySwatch: Colors.red,
-        ),
-        home: MaterialApp.router(
-            routeInformationParser: AppRouter().defaultRouteParser(),
-            routerDelegate: AppRouter().delegate()));
+    return MaterialApp.router(
+      routerDelegate: _router.delegate(),
+      routeInformationParser: _router.defaultRouteParser(),
+    );
   }
 }
