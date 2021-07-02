@@ -1,20 +1,20 @@
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-import 'package:sipandumobile/core/auth/login/index.dart';
-// import 'package:flutter/foundation.dart';
+import 'dart:convert';
 import 'package:sipandumobile/utils/services/http_service.dart';
 
 class LoginService {
-  // String username;
-  // String password;
-
-  // Login({required this.username, required this.password});
-
-  Future<dynamic> login(String username, Password password) async {
+  Future<dynamic> sign(username, password) async {
     Response response;
+
     try {
       response = await HttpService().postRequest(
           '/login/auth', {'username': username, 'password': password});
-      print(response);
+      if (response.statusCode == 200) {
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setString('user', json.encode(response.data.user));
+      }
       return response;
       // if (response.statusCode == 200) {
       // } else {

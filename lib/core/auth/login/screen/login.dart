@@ -32,9 +32,12 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.only(top: 70.0),
         color: Colors.blue[50],
         alignment: Alignment.center,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[LoginForm()],
+        child: BlocProvider(
+          create: (context) => LoginBloc(LoginService()),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[LoginForm()],
+          ),
         ),
       )),
     );
@@ -42,9 +45,6 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 class LoginForm extends StatelessWidget {
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -63,16 +63,15 @@ class LoginForm extends StatelessWidget {
         padding: EdgeInsets.only(left: 30, right: 30),
         color: Colors.red[50],
         width: MediaQuery.of(context).size.width,
-        child: TextFormField(
-          decoration: const InputDecoration(
-            hintText: 'username',
-          ),
-          controller: _usernameController,
-          validator: (String? value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter some text';
-            }
-            return null;
+        child: BlocBuilder<LoginBloc, LoginState>(
+          builder: (context, state) {
+            return TextField(
+              decoration: const InputDecoration(
+                hintText: 'username',
+              ),
+              onChanged: (username) =>
+                  context.read<LoginBloc>().add(LoginUsernameChanged(username)),
+            );
           },
         ),
       ),
@@ -80,27 +79,24 @@ class LoginForm extends StatelessWidget {
         padding: EdgeInsets.only(top: 40, left: 30, right: 30),
         color: Colors.red[50],
         width: MediaQuery.of(context).size.width,
-        child: TextFormField(
-          decoration: const InputDecoration(
-            hintText: 'Password',
-          ),
-          controller: _passwordController,
-          // controller: password,
-          validator: (String? value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter some text';
-            }
-            return null;
+        child: BlocBuilder<LoginBloc, LoginState>(
+          builder: (context, state) {
+            return TextField(
+              decoration: const InputDecoration(
+                hintText: 'Password',
+              ),
+              onChanged: (password) =>
+                  context.read<LoginBloc>().add(LoginPasswordChanged(password)),
+              obscureText: true,
+            );
           },
         ),
       ),
       Container(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
-          width: MediaQuery.of(context).size.width,
-          child: BlocProvider(
-            create: (context) => LoginBloc(LoginService()),
-            child: _LoginButton(),
-          ))
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
+        width: MediaQuery.of(context).size.width,
+        child: _LoginButton(),
+      )
     ]);
   }
 }
