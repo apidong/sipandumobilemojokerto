@@ -84,6 +84,7 @@ class HttpService {
       print(response.headers);
 // print(response.request);
       print(response.statusCode);
+      print('ini');
     } on DioError catch (e) {
       print(e.message);
       throw Exception(e.message);

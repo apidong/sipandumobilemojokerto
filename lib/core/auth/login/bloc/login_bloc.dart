@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sipandumobile/core/auth/login/models/models.dart';
+
 import 'package:sipandumobile/core/auth/login/service/login_service.dart';
 
 part 'login_event.dart';
@@ -54,10 +56,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginState state,
   ) async* {
     try {
-      print(state);
       var cek =
           await _loginservice.sign(state.username.value, state.password.value);
-      print(cek);
+
+      final prefs = await SharedPreferences.getInstance();
+      prefs.getString('user');
     } on Exception catch (_) {}
   }
 }
