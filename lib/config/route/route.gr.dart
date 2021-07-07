@@ -7,8 +7,10 @@
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
-import '../../core/auth/login/screen/login.dart' as _i3;
-import '../../modules/home/home.dart' as _i4;
+import '../../core/auth/login/screen/login.dart' as _i4;
+import '../../core/splashscreen/screen/splashscreen.dart' as _i3;
+import '../../modules/home/screen/home_screen.dart' as _i5;
+import '../../modules/sasaran/screen/sasaran_screen.dart' as _i6;
 
 class AppRouter extends _i1.RootStackRouter {
   AppRouter([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])
@@ -16,33 +18,57 @@ class AppRouter extends _i1.RootStackRouter {
 
   @override
   final Map<String, _i1.PageFactory> pagesMap = {
-    LoginRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    SplashScreen.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i3.LoginPage();
+          return _i3.SplashScreen();
         }),
-    HomeRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    Login.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i4.HomePage();
+          return const _i4.LoginPage();
+        }),
+    HomeScreen.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i5.HomeScreen();
+        }),
+    SasaranScreen.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i6.SasaranScreen();
         })
   };
 
   @override
   List<_i1.RouteConfig> get routes => [
-        _i1.RouteConfig(LoginRoute.name, path: '/'),
-        _i1.RouteConfig(HomeRoute.name, path: '/home-page')
+        _i1.RouteConfig(SplashScreen.name, path: '/'),
+        _i1.RouteConfig(Login.name, path: '/login'),
+        _i1.RouteConfig(HomeScreen.name, path: '/home'),
+        _i1.RouteConfig(SasaranScreen.name, path: '/sasaran')
       ];
 }
 
-class LoginRoute extends _i1.PageRouteInfo {
-  const LoginRoute() : super(name, path: '/');
+class SplashScreen extends _i1.PageRouteInfo {
+  const SplashScreen() : super(name, path: '/');
 
-  static const String name = 'LoginRoute';
+  static const String name = 'SplashScreen';
 }
 
-class HomeRoute extends _i1.PageRouteInfo {
-  const HomeRoute() : super(name, path: '/home-page');
+class Login extends _i1.PageRouteInfo {
+  const Login() : super(name, path: '/login');
 
-  static const String name = 'HomeRoute';
+  static const String name = 'Login';
+}
+
+class HomeScreen extends _i1.PageRouteInfo {
+  const HomeScreen() : super(name, path: '/home');
+
+  static const String name = 'HomeScreen';
+}
+
+class SasaranScreen extends _i1.PageRouteInfo {
+  const SasaranScreen() : super(name, path: '/sasaran');
+
+  static const String name = 'SasaranScreen';
 }

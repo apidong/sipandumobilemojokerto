@@ -80,11 +80,11 @@ class HttpService {
 
     try {
       response = await dio.post(endPoint, data: data);
-      print(response.data);
-      print(response.headers);
+      // print(response.data);
+      // print(response.headers);
 // print(response.request);
-      print(response.statusCode);
-      print('ini');
+      // print(response.statusCode);
+      // print('ini');
     } on DioError catch (e) {
       print(e.message);
       throw Exception(e.message);
