@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:formz/formz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sipandumobile/core/auth/login/models/models.dart';
@@ -56,9 +57,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginState state,
   ) async* {
     try {
-      var cek =
-          await _loginservice.sign(state.username.value, state.password.value);
-
+      await _loginservice.sign(state.username.value, state.password.value);
+      final storage = new FlutterSecureStorage();
+      print(await storage.read(key: 'token'));
       final prefs = await SharedPreferences.getInstance();
       prefs.getString('user');
     } on Exception catch (_) {}

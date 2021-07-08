@@ -10,7 +10,9 @@ import 'package:flutter/material.dart' as _i2;
 import '../../core/auth/login/screen/login.dart' as _i4;
 import '../../core/splashscreen/screen/splashscreen.dart' as _i3;
 import '../../modules/home/screen/home_screen.dart' as _i5;
+import '../../modules/program/screen/program_screen.dart' as _i7;
 import '../../modules/sasaran/screen/sasaran_screen.dart' as _i6;
+import '../../modules/tagging/screen/tagging_screen.dart' as _i8;
 
 class AppRouter extends _i1.RootStackRouter {
   AppRouter([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])
@@ -37,6 +39,16 @@ class AppRouter extends _i1.RootStackRouter {
         routeData: routeData,
         builder: (_) {
           return _i6.SasaranScreen();
+        }),
+    ProgramScreen.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i7.ProgramScreen();
+        }),
+    TaggingScreen.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i8.TaggingScreen();
         })
   };
 
@@ -45,7 +57,9 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(SplashScreen.name, path: '/'),
         _i1.RouteConfig(Login.name, path: '/login'),
         _i1.RouteConfig(HomeScreen.name, path: '/home'),
-        _i1.RouteConfig(SasaranScreen.name, path: '/sasaran')
+        _i1.RouteConfig(SasaranScreen.name, path: '/sasaran'),
+        _i1.RouteConfig(ProgramScreen.name, path: '/program'),
+        _i1.RouteConfig(TaggingScreen.name, path: '/tagging')
       ];
 }
 
@@ -71,4 +85,16 @@ class SasaranScreen extends _i1.PageRouteInfo {
   const SasaranScreen() : super(name, path: '/sasaran');
 
   static const String name = 'SasaranScreen';
+}
+
+class ProgramScreen extends _i1.PageRouteInfo {
+  const ProgramScreen() : super(name, path: '/program');
+
+  static const String name = 'ProgramScreen';
+}
+
+class TaggingScreen extends _i1.PageRouteInfo {
+  const TaggingScreen() : super(name, path: '/tagging');
+
+  static const String name = 'TaggingScreen';
 }

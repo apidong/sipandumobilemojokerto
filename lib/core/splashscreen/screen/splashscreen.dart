@@ -1,13 +1,7 @@
 import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:get/get.dart';
-import 'package:sipandumobile/core/auth/login/screen/login.dart';
 import 'package:sipandumobile/core/splashscreen/service/splashscreen_service.dart';
-import 'package:sipandumobile/utils/services/http_service.dart';
-import 'package:sipandumobile/utils/services/navigation_service.dart';
-import 'package:sipandumobile/config/route/route.gr.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -16,7 +10,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreen extends State<SplashScreen> {
   // _SplashScreen(this.navigatorKey);
-  final _router = AppRouter();
 
   void initState() {
     super.initState();
@@ -27,10 +20,10 @@ class _SplashScreen extends State<SplashScreen> {
   void setupLocator() {}
 
   startSplashScreen() async {
-    Future.delayed(Duration.zero, () async {
+    Future.delayed(Duration(seconds: 3), () async {
       try {
         await SplashscreenService().cek();
-        AutoRouter.of(context).pushNamed('/login');
+        AutoRouter.of(context).pushNamed('/home');
       } catch (e) {
         AutoRouter.of(context).pushNamed('/login');
       }
@@ -61,20 +54,20 @@ class _SplashScreen extends State<SplashScreen> {
     return MaterialApp(
         title: 'Sipandu ',
         home: Scaffold(
-          backgroundColor: Colors.purple,
+          backgroundColor: Colors.deepOrangeAccent.shade700,
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Icon(
-                  Icons.school,
-                  size: 100.0,
-                  color: Colors.white,
+                Image(
+                  image: AssetImage('assets/images/lglogin2.png'),
+                  width: 100,
                 ),
+                // get_request_header
                 SizedBox(height: 24.0),
                 Text(
-                  "SEKOLAHKU",
+                  "SIPANDU MOBILE",
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,

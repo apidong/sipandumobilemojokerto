@@ -2,9 +2,11 @@ import 'package:dio/dio.dart';
 import 'dart:io';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class HttpService {
   var dio = Dio();
+  final storage = new FlutterSecureStorage();
   String deviceId = "";
 
   final String baseUrl =
@@ -19,14 +21,9 @@ class HttpService {
   HttpService() {
     dio.options
       ..baseUrl = baseUrl
-      ..connectTimeout = 5000 //5s
-      ..receiveTimeout = 5000
       ..headers = {
-        HttpHeaders.userAgentHeader: 'dio',
-        'common-header': 'xx',
         'Content-Type': 'application/json',
         'android': 'true',
-        'Token-App-Key': ''
       };
 
     initializeInterceptors();
@@ -57,7 +54,9 @@ class HttpService {
   Future<Response> getRequest(String endPoint) async {
     Response response;
     var idDevice = await getid();
+    final token = await this.storage.read(key: 'token');
     dio.options.headers["device"] = idDevice;
+    dio.options.headers['Token-App-Key'] = (token != null) ? token : '';
 
     try {
       response = await dio.get(endPoint);
@@ -76,10 +75,13 @@ class HttpService {
   Future<Response> postRequest(String endPoint, Object data) async {
     Response response;
     var idDevice = await getid();
+    final token = await this.storage.read(key: 'token');
     dio.options.headers["device"] = idDevice;
+    dio.options.headers['Token-App-Key'] = (token != null) ? token : '';
 
     try {
       response = await dio.post(endPoint, data: data);
+      // print('ini data');
       // print(response.data);
       // print(response.headers);
 // print(response.request);

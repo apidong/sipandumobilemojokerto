@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
-class HeaderScreen extends StatelessWidget {
+class HeaderScreen extends StatefulWidget {
+  final String namatext;
+  HeaderScreen({required this.namatext}) : super();
+
+  @override
+  _HeaderScreen createState() => _HeaderScreen();
+}
+
+class _HeaderScreen extends State<HeaderScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,7 +21,7 @@ class HeaderScreen extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          'Sasaran',
+          this.widget.namatext,
           style: TextStyle(
               fontSize: 36, fontWeight: FontWeight.w700, color: Colors.white),
         ),

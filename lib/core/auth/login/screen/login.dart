@@ -26,11 +26,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Welcome to Flutter',
+      title: 'sipandu',
       home: Scaffold(
           body: Container(
         padding: EdgeInsets.only(top: 70.0),
-        color: Colors.blue[50],
+        color: Colors.deepOrangeAccent.shade200,
         alignment: Alignment.center,
         child: BlocProvider(
           create: (context) => LoginBloc(LoginService()),
@@ -50,24 +50,26 @@ class LoginForm extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
       Container(
           height: 75,
-          color: Colors.red[50],
           child: Image(image: AssetImage('assets/images/lglogin2.png'))),
       Container(
           padding: EdgeInsets.only(top: 20.0, bottom: 50),
-          color: Colors.red[50],
           child: const Text(
             'SIPANDU MOBILE',
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 30, color: Colors.white),
           )),
       Container(
         padding: EdgeInsets.only(left: 30, right: 30),
-        color: Colors.red[50],
         width: MediaQuery.of(context).size.width,
         child: BlocBuilder<LoginBloc, LoginState>(
           builder: (context, state) {
             return TextField(
+              style: TextStyle(color: Colors.grey.shade100),
               decoration: const InputDecoration(
-                hintText: 'username',
+                labelStyle: TextStyle(color: Colors.black),
+                labelText: 'Username',
+                hintText: 'Username',
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.orange)),
               ),
               onChanged: (username) =>
                   context.read<LoginBloc>().add(LoginUsernameChanged(username)),
@@ -77,13 +79,18 @@ class LoginForm extends StatelessWidget {
       ),
       Container(
         padding: EdgeInsets.only(top: 40, left: 30, right: 30),
-        color: Colors.red[50],
+        // color: Colors.red[50],
         width: MediaQuery.of(context).size.width,
         child: BlocBuilder<LoginBloc, LoginState>(
           builder: (context, state) {
             return TextField(
+              style: TextStyle(color: Colors.grey.shade100),
               decoration: const InputDecoration(
+                labelText: 'Password',
                 hintText: 'Password',
+                labelStyle: TextStyle(color: Colors.black),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.orange)),
               ),
               onChanged: (password) =>
                   context.read<LoginBloc>().add(LoginPasswordChanged(password)),
@@ -106,12 +113,13 @@ class _LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
       return ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+          ),
           key: const Key('loginForm_continue_raisedButton'),
           child: const Text('Login'),
           onPressed: () {
-            context
-                .read<LoginBloc>()
-                .add(const LoginSubmitted('ssss', 'sssss'));
+            context.read<LoginBloc>().add(const LoginSubmitted());
           });
     });
   }

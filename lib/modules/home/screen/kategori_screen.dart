@@ -36,7 +36,6 @@ class KategoriScreen extends StatelessWidget {
                       iconSize: 40,
                       onPressed: () {
                         context.router.push(SasaranScreen());
-                        print('object');
                       }),
                   Text(
                     'Sasaran',
@@ -77,7 +76,7 @@ class KategoriScreen extends StatelessWidget {
                       icon: FaIcon(FontAwesomeIcons.th),
                       iconSize: 40,
                       onPressed: () {
-                        print("Pressed");
+                        context.router.push(ProgramScreen());
                       }),
                   Text(
                     'Program',
@@ -171,7 +170,7 @@ class KategoriScreen extends StatelessWidget {
                       icon: FaIcon(FontAwesomeIcons.mapMarkerAlt),
                       iconSize: 40,
                       onPressed: () {
-                        print("Pressed");
+                        context.router.push(TaggingScreen());
                       }),
                   Text(
                     'Tagging',

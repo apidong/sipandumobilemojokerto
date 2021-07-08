@@ -31,7 +31,6 @@ dependencies:
   auto_route: ^2.0.0  
   logger: ^1.0.0
   http_interceptor: ^1.0.0
-  http: ^0.13.3
   dio: ^4.0.0
   device_info: ^2.0.2
   plugin_platform_interface: ^2.0.0

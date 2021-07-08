@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:sipandumobile/modules/sasaran/screen/kategori_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sipandumobile/utils/ui/header/header_screen.dart';
 
-class SasaranScreen extends StatefulWidget {
+class ProgramScreen extends StatefulWidget {
   @override
-  SasaranScreenState createState() {
-    return SasaranScreenState();
+  ProgramScreenState createState() {
+    return ProgramScreenState();
   }
 }
 
-class SasaranScreenState extends State<SasaranScreen> {
-  SasaranScreenState();
+class ProgramScreenState extends State<ProgramScreen> {
+  ProgramScreenState();
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class SasaranScreenState extends State<SasaranScreen> {
                 child: Column(
               children: [
                 HeaderScreen(
-                  namatext: 'Sasaran',
+                  namatext: 'Program',
                 ),
                 Align(
                     alignment: Alignment.centerLeft,
@@ -49,7 +49,6 @@ class SasaranScreenState extends State<SasaranScreen> {
                       ),
                     )),
                 Padding(padding: EdgeInsets.only(top: 10)),
-                KategoriScreen()
               ],
             ))));
   }

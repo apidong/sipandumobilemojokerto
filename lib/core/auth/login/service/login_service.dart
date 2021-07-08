@@ -13,8 +13,6 @@ class LoginService {
       response = await HttpService().postRequest(
           '/login/auth', {'username': username, 'password': password});
       if (response.statusCode == 200) {
-        print('session_s');
-        // print(response.data);
         final prefs = await SharedPreferences.getInstance();
         final storage = new FlutterSecureStorage();
         var data = SignModel.fromJson(response.data);
@@ -23,8 +21,8 @@ class LoginService {
       }
       return response;
     } catch (e) {
-      print(e);
       print("There is some problem status code not 200");
+      return e;
     }
   }
 }
