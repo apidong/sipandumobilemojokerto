@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -57,11 +56,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginState state,
   ) async* {
     try {
-      await _loginservice.sign(state.username.value, state.password.value);
+      final login =
+          await _loginservice.sign(state.username.value, state.password.value);
       final storage = new FlutterSecureStorage();
       print(await storage.read(key: 'token'));
       final prefs = await SharedPreferences.getInstance();
-      prefs.getString('user');
+      if (login['login'] == true) {}
+      print('ini login');
+      print(login);
     } on Exception catch (_) {}
   }
 }

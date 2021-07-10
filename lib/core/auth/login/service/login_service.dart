@@ -18,6 +18,7 @@ class LoginService {
         var data = SignModel.fromJson(response.data);
         prefs.setString('user', json.encode(data.data?.user?.username));
         storage.write(key: 'token', value: data.data?.token);
+        return json.encode(data.data);
       }
       return response;
     } catch (e) {

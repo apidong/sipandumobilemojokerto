@@ -1,8 +1,8 @@
 part of 'tagging_bloc.dart';
 
-abstract class TaggingState extends Equatable {
+class TaggingState extends Equatable {
   const TaggingState();
-  
+  // var penduduk;
   @override
   List<Object> get props => [];
 }

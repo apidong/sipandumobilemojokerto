@@ -21,10 +21,12 @@ class _SplashScreen extends State<SplashScreen> {
 
   startSplashScreen() async {
     Future.delayed(Duration(seconds: 3), () async {
-      try {
-        await SplashscreenService().cek();
+      final ceklogin = await SplashscreenService().cek();
+      print('ini login');
+      print(ceklogin['status']);
+      if (ceklogin['status'] == true) {
         AutoRouter.of(context).pushNamed('/home');
-      } catch (e) {
+      } else {
         AutoRouter.of(context).pushNamed('/login');
       }
     });

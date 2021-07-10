@@ -14,9 +14,9 @@ class SplashscreenService {
       response = await HttpService().postRequest('/validation', {'data': true});
       var data = CekModel.fromJson(response.data);
       // response.statusCode
-      return response;
+      return data;
     } catch (_) {
-      return _;
+      return {'status': false, 'message': _};
     }
   }
 }
