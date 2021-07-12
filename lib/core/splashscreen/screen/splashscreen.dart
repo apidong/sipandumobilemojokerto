@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:sipandumobile/core/splashscreen/service/splashscreen_service.dart';
@@ -17,17 +18,24 @@ class _SplashScreen extends State<SplashScreen> {
     startSplashScreen();
   }
 
+  void dispose() {
+    super.dispose();
+  }
+
   void setupLocator() {}
 
   startSplashScreen() async {
     Future.delayed(Duration(seconds: 3), () async {
       final ceklogin = await SplashscreenService().cek();
-      print('ini login');
-      print(ceklogin['status']);
-      if (ceklogin['status'] == true) {
-        AutoRouter.of(context).pushNamed('/home');
+      json.encode(ceklogin);
+
+      if (ceklogin.status == true) {
+        // context.popRoute();
+        context.replaceRoute(PageRouteInfo('HomeScreen', path: '/home'));
+        // context.navigateNamedTo('/home');
       } else {
-        AutoRouter.of(context).pushNamed('/login');
+        context.replaceRoute(PageRouteInfo('Login', path: '/login'));
+        // AutoRouter.of(context).pushNamed('/login');
       }
     });
 

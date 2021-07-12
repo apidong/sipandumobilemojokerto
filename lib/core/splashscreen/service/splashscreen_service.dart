@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:sipandumobile/core/splashscreen/models/cek_model.dart';
 import 'package:sipandumobile/utils/services/http_service.dart';
@@ -13,10 +15,19 @@ class SplashscreenService {
       print(allValues);
       response = await HttpService().postRequest('/validation', {'data': true});
       var data = CekModel.fromJson(response.data);
+
+      print('responses');
+      print(response.data);
+
       // response.statusCode
       return data;
     } catch (_) {
-      return {'status': false, 'message': _};
+      final rError =
+          CekModel.fromJson({'status': false, 'message': _.toString()});
+      final storage = new FlutterSecureStorage();
+      await storage.deleteAll();
+
+      return rError;
     }
   }
 }

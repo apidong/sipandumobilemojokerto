@@ -16,7 +16,6 @@ class SignModel {
   SignModel({this.status, this.data, this.message});
 
   factory SignModel.fromJson(Map<String, dynamic> json) {
-    print(json);
     return _$SignModelFromJson(json);
   }
 

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -5,7 +7,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:formz/formz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sipandumobile/core/auth/login/models/models.dart';
-
+import 'package:sipandumobile/core/auth/login/models/sign_model/sign_model.dart';
 import 'package:sipandumobile/core/auth/login/service/login_service.dart';
 
 part 'login_event.dart';
@@ -55,15 +57,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginSubmitted event,
     LoginState state,
   ) async* {
+    yield state.copyWith(status: FormzStatus.submissionInProgress);
+
     try {
       final login =
           await _loginservice.sign(state.username.value, state.password.value);
-      final storage = new FlutterSecureStorage();
-      print(await storage.read(key: 'token'));
-      final prefs = await SharedPreferences.getInstance();
-      if (login['login'] == true) {}
-      print('ini login');
-      print(login);
-    } on Exception catch (_) {}
+      final _login = json.decode(login);
+
+      if (_login['status'] == true) {
+        print('login succes');
+        yield state.copyWith(status: FormzStatus.submissionSuccess);
+      } else {
+        print('login gagal');
+        yield state.copyWith(status: FormzStatus.submissionFailure);
+      }
+      // print('ini login');
+      // print(login);
+    } on Exception catch (_) {
+      yield state.copyWith(status: FormzStatus.submissionFailure);
+    }
   }
 }

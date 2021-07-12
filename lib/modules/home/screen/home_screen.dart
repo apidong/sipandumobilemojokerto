@@ -1,5 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sipandumobile/config/route/route.gr.dart';
 import 'package:sipandumobile/modules/home/bloc/home_bloc.dart';
 import 'package:sipandumobile/modules/home/screen/banner_screen.dart';
 import 'package:sipandumobile/modules/home/screen/kategori_screen.dart';
@@ -17,6 +20,16 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    this.startHomeScreen();
+  }
+
+  startHomeScreen() async {
+    SchedulerBinding.instance?.addPostFrameCallback((_) {
+      // context.replaceRoute(PageRouteInfo('SplashScreen', path: '/home'));
+      // context.popRoute(PageRouteInfo('HomeScreen', path: '/home'));
+      // Navigator.of(context).pushNamedAndRemoveUntil(
+      //     '/loginPage', (Route<dynamic> route) => false);
+    });
   }
 
   @override

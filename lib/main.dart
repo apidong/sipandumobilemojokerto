@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter/widgets.dart';
 import 'package:sipandumobile/config/route/route.gr.dart';
@@ -13,7 +14,10 @@ class SipanduApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerDelegate: _router.delegate(),
+      routerDelegate: AutoRouterDelegate(
+        _router,
+        navigatorObservers: () => [AutoRouteObserver()],
+      ),
       routeInformationParser: _router.defaultRouteParser(),
     );
   }

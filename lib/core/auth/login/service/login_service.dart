@@ -12,18 +12,23 @@ class LoginService {
     try {
       response = await HttpService().postRequest(
           '/login/auth', {'username': username, 'password': password});
+      final data = SignModel.fromJson(response.data);
       if (response.statusCode == 200) {
-        final prefs = await SharedPreferences.getInstance();
-        final storage = new FlutterSecureStorage();
-        var data = SignModel.fromJson(response.data);
-        prefs.setString('user', json.encode(data.data?.user?.username));
-        storage.write(key: 'token', value: data.data?.token);
-        return json.encode(data.data);
+        if (data.status == true) {
+          final prefs = await SharedPreferences.getInstance();
+          final storage = new FlutterSecureStorage();
+          prefs.setString('user', json.encode(data.data?.user?.username));
+          storage.write(key: 'token', value: data.data?.token);
+        }
+        return json.encode(data);
       }
-      return response;
-    } catch (e) {
-      print("There is some problem status code not 200");
-      return e;
+      return {
+        'status': 'false',
+        'message': 'hubungi administrator : unknown error at login service'
+      };
+    } catch (_) {
+      final rError = {'status': 'false', 'message': _};
+      return rError;
     }
   }
 }
