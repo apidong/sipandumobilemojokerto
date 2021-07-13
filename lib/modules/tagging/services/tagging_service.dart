@@ -4,7 +4,7 @@ class TaggingService {
   Future<dynamic> getPenduduk() async {
     try {
       final response = await HttpService().getRequest('/master/penduduk');
-      print(response);
+
       // response.statusCode
       return response;
     } catch (_) {
