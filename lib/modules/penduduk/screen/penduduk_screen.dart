@@ -1,24 +1,21 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sipandumobile/modules/tagging/bloc/tagging_bloc.dart';
+import 'package:sipandumobile/modules/penduduk/bloc/penduduk_bloc.dart';
 
-class TaggingScreen extends StatefulWidget {
+class PendudukScreen extends StatefulWidget {
   @override
-  TaggingScreenState createState() {
-    return TaggingScreenState();
-  }
+  PendudukScreenState createState() => new PendudukScreenState();
 }
 
-class TaggingScreenState extends State<TaggingScreen> {
-  TaggingScreenState();
-  final TaggingBloc _taggingbloc = TaggingBloc();
+class PendudukScreenState extends State<PendudukScreen> {
+  PendudukBloc _pendudukBloc = PendudukBloc();
 
   @override
   void initState() {
     super.initState();
-    _taggingbloc.add(GetPenduduk());
+    // _pendudukBloc = BlocProvider.of<PendudukBloc>(context);
+    _pendudukBloc.add(GetPendudukEvent());
   }
 
   @override
@@ -42,14 +39,33 @@ class TaggingScreenState extends State<TaggingScreen> {
               constraints:
                   BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
               child: BlocProvider(
-                create: (context) => TaggingBloc(),
-                child: BlocListener<TaggingBloc, TaggingState>(
+                create: (context) => PendudukBloc(),
+                child: BlocListener<PendudukBloc, PendudukState>(
                   listener: (context, state) {
                     print('proses state');
                     print(state);
                     // TODO: implement listener
                   },
                   child: Column(children: [
+                    BlocBuilder<PendudukBloc, PendudukState>(
+                      builder: (context, state) {
+                        print('cekstate');
+                        print(state);
+                        if (state is PendudukLoadingState) {
+                          return Container(
+                            height: 100,
+                            width: 100,
+                            color: Colors.red,
+                          );
+                        } else {
+                          return Container(
+                            height: 100,
+                            width: 100,
+                            color: Colors.amberAccent,
+                          );
+                        }
+                      },
+                    ),
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: 110,

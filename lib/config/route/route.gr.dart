@@ -10,9 +10,9 @@ import 'package:flutter/material.dart' as _i2;
 import '../../core/auth/login/screen/login.dart' as _i4;
 import '../../core/splashscreen/screen/splashscreen.dart' as _i3;
 import '../../modules/home/screen/home_screen.dart' as _i5;
+import '../../modules/penduduk/screen/penduduk_screen.dart' as _i8;
 import '../../modules/program/screen/program_screen.dart' as _i7;
 import '../../modules/sasaran/screen/sasaran_screen.dart' as _i6;
-import '../../modules/tagging/screen/tagging_screen.dart' as _i8;
 
 class AppRouter extends _i1.RootStackRouter {
   AppRouter([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])
@@ -45,10 +45,10 @@ class AppRouter extends _i1.RootStackRouter {
         builder: (_) {
           return _i7.ProgramScreen();
         }),
-    TaggingScreen.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    PendudukScreen.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i8.TaggingScreen();
+          return _i8.PendudukScreen();
         })
   };
 
@@ -59,7 +59,7 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(HomeScreen.name, path: '/home'),
         _i1.RouteConfig(SasaranScreen.name, path: '/sasaran'),
         _i1.RouteConfig(ProgramScreen.name, path: '/program'),
-        _i1.RouteConfig(TaggingScreen.name, path: '/tagging')
+        _i1.RouteConfig(PendudukScreen.name, path: '/penduduk')
       ];
 }
 
@@ -93,8 +93,8 @@ class ProgramScreen extends _i1.PageRouteInfo {
   static const String name = 'ProgramScreen';
 }
 
-class TaggingScreen extends _i1.PageRouteInfo {
-  const TaggingScreen() : super(name, path: '/tagging');
+class PendudukScreen extends _i1.PageRouteInfo {
+  const PendudukScreen() : super(name, path: '/penduduk');
 
-  static const String name = 'TaggingScreen';
+  static const String name = 'PendudukScreen';
 }

@@ -170,7 +170,7 @@ class KategoriScreen extends StatelessWidget {
                       icon: FaIcon(FontAwesomeIcons.mapMarkerAlt),
                       iconSize: 40,
                       onPressed: () {
-                        context.router.push(TaggingScreen());
+                        context.router.push(PendudukScreen());
                       }),
                   Text(
                     'Tagging',

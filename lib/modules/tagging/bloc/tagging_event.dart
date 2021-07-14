@@ -10,11 +10,11 @@ abstract class TaggingEvent extends Equatable {
 class GetPenduduk extends TaggingEvent {
   // final penduduk;
 
-  // DataPenduduk(this.penduduk);
+  // GetPenduduk({this.penduduk});
 
   // @override
   // List<Object> get props => [penduduk];
-
+  GetPenduduk();
   @override
   List<Object> get props => [];
 }

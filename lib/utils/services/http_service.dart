@@ -60,12 +60,13 @@ class HttpService {
 
     try {
       response = await dio.get(endPoint);
-      print(response.data);
-      print(response.headers);
+
+      // print(response.data);
+      // print(response.headers);
 // print(response.request);
-      print(response.statusCode);
+      // print(response.statusCode);
     } on DioError catch (e) {
-      print(e.message);
+      // print(e.message);
       throw Exception(e.message);
     }
 

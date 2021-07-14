@@ -22,3 +22,12 @@ class TaggingLoaded extends TaggingState {
   @override
   List<Object> get props => [penduduk];
 }
+
+class TaggingLoading extends TaggingState {
+  TaggingLoading();
+
+  @override
+  List<Object> get props => [];
+}
+
+class TaggingError extends TaggingState {}
