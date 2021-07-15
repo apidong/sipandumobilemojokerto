@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -71,8 +69,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         print('login gagal');
         yield state.copyWith(status: FormzStatus.submissionFailure);
       }
-      // print('ini login');
-      // print(login);
     } on Exception catch (_) {
       yield state.copyWith(status: FormzStatus.submissionFailure);
     }

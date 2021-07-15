@@ -12,15 +12,18 @@ class PendudukInitial extends PendudukState {
   List<Object> get props => [];
 }
 
-class PendudukLoadingState extends PendudukState {}
+class PendudukLoadingState extends PendudukState {
+  @override
+  List<Object> get props => [];
+}
 
 class PendudukSucessState extends PendudukState {
   final PendudukModel penduduk;
-
-  PendudukSucessState({required this.penduduk}) {
-    print('ini state');
-    print(penduduk.data!.toJson());
+  PendudukSucessState({required this.penduduk});
+  PendudukSucessState copyWith({PendudukModel? penduduk}) {
+    return PendudukSucessState(penduduk: penduduk ?? this.penduduk);
   }
+
   @override
   List<Object> get props => [penduduk];
 }
