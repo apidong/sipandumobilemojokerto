@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -16,15 +17,13 @@ class PendudukBloc extends Bloc<PendudukEvent, PendudukState> {
   Stream<PendudukState> mapEventToState(
     PendudukEvent event,
   ) async* {
-    // TODO: implement mapEventToState
     if (event is GetPendudukEvent) {
       yield PendudukLoadingState();
+
       try {
         final masterpenduduk = await TaggingService().getPenduduk();
-        print(masterpenduduk);
         final _masterpenduduk = PendudukModel.fromJson(masterpenduduk.data);
         yield PendudukSucessState(penduduk: _masterpenduduk);
-        print('masuk');
       } catch (e) {
         print(e);
       }
